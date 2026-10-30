@@ -1,6 +1,7 @@
 FROM golang:1.26.3-bookworm
 
-RUN apt-get update && apt-get install -y --no-install-recommends graphviz && \
+RUN sed -i 's@deb.debian.org@mirrors.aliyun.com@g' /etc/apt/sources.list.d/debian.sources && \
+  apt-get update && apt-get install -y --no-install-recommends graphviz && \
   apt-get autoremove -y && apt-get autoclean && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN go install github.com/google/pprof@latest
 
